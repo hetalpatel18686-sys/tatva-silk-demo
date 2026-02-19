@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Tatva Silk • Elegance in Every Weave</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Tatva Silk • Bilimora, Navsari — Premium silk sarees and collections" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f3f4f6;            /* page gray */
+      --ink:#111827;          /* text */
+      --muted:#6b7280;        /* subtle text */
+      --brand:#8B5E3C;        /* Tatva gold-brown */
+      --brand-2:#CFAF80;      /* light gold */
+      --header:#131921;       /* Amazon-like dark header */
+      --header-2:#232f3e;     /* Amazon-like subnav */
+      --badge:#2563eb;        /* blue deal badge */
+      --card:#ffffff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      color:var(--ink); background:var(--bg);
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1400px; margin:0 auto; padding:0 16px}
+    .text-muted{color:var(--muted)}
+    .btn{display:inline-flex; align-items:center; gap:8px; border:1px solid #d1d5db; padding:10px 14px; border-radius:8px; background:#fff; cursor:pointer}
+    .btn.primary{background:var(--brand); color:#fff; border-color:var(--brand)}
+    .btn:hover{filter:brightness(.98)}
+    /* ==== HEADER TOP ==== */
+    .header{background:var(--header); color:#fff}
+    .header .row{display:flex; align-items:center; gap:12px; padding:10px 0}
+    .logo{display:flex; align-items:center; gap:10px}
+    .logo .mark{
+      width:34px; height:34px; border-radius:6px; background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      display:grid; place-items:center; color:white; font-weight:700; font-family:"Playfair Display",serif;
+    }
+    .logo .name{font-weight:700; letter-spacing:.3px}
+    .deliver{font-size:12px; line-height:1.2}
+    .deliver strong{display:block; font-size:13px}
+    .search{
+      flex:1; display:flex; background:#fff; border-radius:8px; overflow:hidden; border:1px solid #e5e7eb;
+    }
+    .search select{border:none; background:#f9fafb; padding:10px 8px; outline:0; font-size:14px}
+    .search input{border:none; outline:0; padding:10px 12px; font-size:14px; flex:1}
+    .search button{background:#febd69; border:none; padding:0 14px; cursor:pointer}
+    .hdr-links{display:flex; gap:16px; align-items:center}
+    .hdr-links .mini{font-size:12px}
+    .hdr-links .big{font-weight:600}
+    .cart{position:relative}
+    .cart .count{
+      position:absolute; top:-6px; right:-8px; background:#ef4444; color:#fff; font-size:11px;
+      border-radius:999px; padding:2px 6px
+    }
+    /* ==== SUBNAV ==== */
+    .subnav{background:var(--header-2); color:#e5e7eb; font-size:14px}
+    .subnav .row{display:flex; gap:20px; padding:10px 0; overflow:auto}
+    .subnav a{white-space:nowrap}
+    .subnav a:hover{text-decoration:underline}
+    /* ==== HERO ==== */
+    .hero{position:relative; background:linear-gradient(180deg,#c0d8ff,#e8eefc 55%, transparent); padding-bottom:24px}
+    .hero .carousel{position:relative; height:320px; border-radius:8px; overflow:hidden}
+    .hero .slides{display:flex; width:100%; height:100%; transition:transform .6s ease}
+    .hero .slide{
+      min-width:100%; background:#ddd url('https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+      display:flex; align-items:center; justify-content:flex-start; padding-left:40px; color:#0f172a;
+    }
+    .hero .slide.two{background-image:url('https://images.unsplash.com/photo-1604881982416-b8ac5a7f3f5b?q=80&w=1600&auto=format&fit=crop')}
+    .hero .slide.three{background-image:url('https://images.unsplash.com/photo-1622371235100-f7a2c2a19b36?q=80&w=1600&auto=format&fit=crop')}
+    .hero .headline{background:rgba(255,255,255,.9); padding:14px 18px; border-radius:8px; max-width:520px}
+    .hero .headline h1{margin:0 0 6px; font-family:"Playfair Display",serif; font-weight:700}
+    .hero .dots{position:absolute; left:0; right:0; bottom:8px; display:flex; gap:6px; justify-content:center}
+    .hero .dot{width:9px;height:9px;border-radius:999px;background:#cbd5e1;cursor:pointer}
+    .hero .dot.active{background:#334155}
+    /* ==== PROMO GRID ==== */
+    .promos{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:-80px}
+    .card{background:var(--card); border-radius:8px; padding:14px; box-shadow:0 1px 2px rgba(0,0,0,.06)}
+    .card h3{margin:0 0 10px; font-size:16px}
+    .card .thumb{height:170px; border-radius:8px; background:#eee url('https://placehold.co/600x400') center/cover no-repeat; margin-bottom:10px}
+    .card .link{color:#2563eb; font-size:13px}
+    /* ==== DEAL ROWS ==== */
+    .strip{margin:22px 0}
+    .strip h2{font-size:20px; margin:0 0 10px}
+    .items{display:grid; grid-template-columns:repeat(6,1fr); gap:12px}
+    .itm{background:#fff; border-radius:8px; padding:10px; box-shadow:0 1px 2px rgba(0,0,0,.06)}
+    .itm .img{height:140px; border-radius:6px; background:#eee center/cover no-repeat}
+    .itm .title{font-size:13px; margin-top:8px; min-height:34px}
+    .price{font-weight:700}
+    .badge{display:inline-block; font-size:12px; color:#fff; background:var(--badge); padding:3px 8px; border-radius:6px; margin-top:6px}
+    /* ==== FOOTER ==== */
+    .footer{background:#0f172a; color:#cbd5e1; margin-top:30px}
+    .footer .container{padding:24px 16px}
+    .brandline{display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .brandline .brand{display:flex; align-items:center; gap:10px}
+    .brandline .brand .mark{width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff; display:grid; place-items:center; font-weight:700; font-family:"Playfair Display",serif;}
+    .brandline small{color:#94a3b8}
+    /* ==== RESPONSIVE ==== */
+    @media (max-width: 1200px){
+      .items{grid-template-columns:repeat(5,1fr)}
+      .promos{grid-template-columns:repeat(3,1fr)}
+    }
+    @media (max-width: 900px){
+      .search select{display:none}
+      .promos{grid-template-columns:repeat(2,1fr)}
+      .items{grid-template-columns:repeat(4,1fr)}
+      .hero .carousel{height:260px}
+    }
+    @media (max-width: 640px){
+      .header .row{flex-wrap:wrap}
+      .deliver{display:none}
+      .hdr-links{gap:10px}
+      .promos{grid-template-columns:1fr}
+      .items{grid-template-columns:repeat(2,1fr)}
+      .hero{padding-bottom:12px}
+      .hero .carousel{height:220px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="container row">
+      <a href="#" class="logo">
+        <div class="mark">TS</div>
+        <div class="name">Tatva Silk</div>
+      </a>
+
+      <div class="deliver">
+        Deliver to <strong>Bilimora, Navsari 396321</strong>
+      </div>
+
+      <form class="search" onsubmit="event.preventDefault()">
+        <select aria-label="All categories">
+          <option>All</option>
+          <option>Sarees</option>
+          <option>Collections</option>
+          <option>Accessories</option>
+        </select>
+        <input placeholder="Search Tatva Silk" />
+        <button title="Search">🔍</button>
+      </form>
+
+      <div class="hdr-links">
+        <div>
+          <div class="mini">Language</div>
+          <div class="big">EN</div>
+        </div>
+        <div>
+          <div class="mini">Hello, sign in</div>
+          <div class="big">Account & Lists</div>
+        </div>
+        <div>
+          <div class="mini">Returns</div>
+          <div class="big">& Orders</div>
+        </div>
+        <a class="cart" href="#">
+          🛒 <span class="big">Cart</span>
+          <span class="count">2</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBNAV -->
+  <div class="subnav">
+    <div class="container row">
+      <a href="#">All</a>
+      <a href="#">New Arrivals</a>
+      <a href="#">Banarasi</a>
+      <a href="#">Kanjivaram</a>
+      <a href="#">Patola</a>
+      <a href="#">Soft Silk</a>
+      <a href="#">Wedding</a>
+      <a href="#">Gifts</a>
+      <a href="#">Today’s Deals</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="container">
+      <div id="carousel" class="carousel">
+        <div id="slides" class="slides">
+          <div class="slide one">
+            <div class="headline">
+              <h1>Fast shipping on beautiful silk sarees</h1>
+              <div class="text-muted">Discover Tatva Silk collections curated from Bilimora, Navsari.</div>
+              <div style="margin-top:10px">
+                <a href="#" class="btn primary">Shop Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="slide two">
+            <div class="headline">
+              <h1>Save on festive collections</h1>
+              <div class="text-muted">Limited‑time offers on Banarasi & Kanjivaram selections.</div>
+              <div style="margin-top:10px">
+                <a href="#" class="btn">View Offers</a>
+              </div>
+            </div>
+          </div>
+          <div class="slide three">
+            <div class="headline">
+              <h1>Gifts under ₹2,000</h1>
+              <div class="text-muted">Dupattas, stoles, and accessories crafted in silk.</div>
+              <div style="margin-top:10px">
+                <a href="#" class="btn">Browse Gifts</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="dots" class="dots" aria-label="carousel indicators"></div>
+      </div>
+
+      <!-- PROMO CARDS -->
+      <div class="promos">
+        <div class="card">
+          <h3>Pick up where you left off</h3>
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1603796846097-bee99e4a601f?q=80&w=1200&auto=format&fit=crop')"></div>
+          <a class="link" href="#">See more</a>
+        </div>
+        <div class="card">
+          <h3>Save on Tatva Devices (Steamers, Care)</h3>
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1520975922203-b6b8d3f1f4b4?q=80&w=1200&auto=format&fit=crop')"></div>
+          <a class="link" href="#">Shop deals</a>
+        </div>
+        <div class="card">
+          <h3>Gift cards under ₹500</h3>
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop')"></div>
+          <a class="link" href="#">Send a gift</a>
+        </div>
+        <div class="card">
+          <h3>Up to 50% off • Outlet</h3>
+          <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1603190287605-e6ade32fa852?q=80&w=1200&auto=format&fit=crop')"></div>
+          <a class="link" href="#">Shop Outlet</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEAL STRIPS -->
+  <div class="container">
+    <div class="strip">
+      <h2>Presidents’ Day Sale: Save up to 40% off</h2>
+      <div class="items">
+        <div class="itm">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1542060748-10c28b62716b?q=80&w=800&auto=format&fit=crop')"></div>
+          <div class="title">Banarasi Silk Saree – Ruby Red</div>
+          <div class="price">₹ 9,999</div>
+          <div class="badge">Limited time</div>
+        </div>
+        <div class="itm">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1520974735194-6e0b29f44a40?q=80&w=800&auto=format&fit=crop')"></div>
+          <div class="title">Kanjivaram Handloom – Gold Border</div>
+          <div class="price">₹ 12,499</div>
+          <div class="badge">25% off</div>
+        </div>
+        <div class="itm">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1542089363-5dc0d2ade1ad?q=80&w=800&auto=format&fit=crop')"></div>
+          <div class="title">Patola Gujarat Weave – Emerald</div>
+          <div class="price">₹ 8,999</div>
+          <div class="badge">Hot</div>
+        </div>
+        <div class="itm">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=80&w=800&auto=format&fit=crop')"></div>
+          <div class="title">Soft Silk – Peacock Blue</div>
+          <div class="price">₹ 5,999</div>
+        </div>
+        <div class="itm">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1561212044-bac5ef688a49?q=80&w=800&auto=format&fit=crop')"></div>
+          <div class="title">Zari Dupatta – Rose Gold</div>
+          <div class="price">₹ 1,899</div>
+        </div>
+        <div class="itm">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1578301977066-3f8c3f1e06f2?q=80&w=800&auto=format&fit=crop')"></div>
+          <div class="title">Silk Stole – Gift Box</div>
+          <div class="price">₹ 999</div>
+          <div class="badge">Under ₹1,000</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="strip">
+      <h2>Pick from Collections</h2>
+      <div class="items">
+        <div class="itm">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1520975739166-7f4f90f7b4bd?q=80&w=800&auto=format&fit=crop')"></div>
+          <div class="title">Banarasi Festive</div>
+          <div class="price">From ₹ 7,499</div>
+        </div>
+        <div class="itm">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=800&auto=format&fit=crop')"></div>
+          <div class="title">Kanjivaram Classic</div>
+          <div class="price">From ₹ 9,999</div>
+        </div>
+        <div class="itm">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=800&auto=format&fit=crop')"></div>
+          <div class="title">Patola Signature</div>
+          <div class="price">From ₹ 8,499</div>
+        </div>
+        <div class="itm">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1520976110203-2dcd73c387bf?q=80&w=800&auto=format&fit=crop')"></div>
+          <div class="title">Soft Silk Everyday</div>
+          <div class="price">From ₹ 4,999</div>
+        </div>
+        <div class="itm">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1592878849120-1b1d3b8d0c52?q=80&w=800&auto=format&fit=crop')"></div>
+          <div class="title">Dupattas & Stoles</div>
+          <div class="price">From ₹ 799</div>
+        </div>
+        <div class="itm">
+          <div class="img" style="background-image:url('https://images.unsplash.com/photo-1520975916090-3105956d0f2d?q=80&w=800&auto=format&fit=crop')"></div>
+          <div class="title">Gifting</div>
+          <div class="price">From ₹ 499</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="container">
+      <div class="brandline">
+        <div class="brand">
+          <div class="mark">TS</div>
+          <div>
+            <div style="font-weight:700">Tatva Silk</div>
+            <small>Bilimora, Navsari • Gujarat</small>
+          </div>
+        </div>
+        <small>© <span id="yr"></span> Tatva Silk. All rights reserved.</small>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Simple carousel
+    const slides = document.getElementById('slides');
+    const dotsWrap = document.getElementById('dots');
+    const total = 3;
+    let idx = 0, t;
+
+    function renderDots(){
+      dotsWrap.innerHTML = '';
+      for(let i=0;i<total;i++){
+        const d=document.createElement('div');
+        d.className='dot'+(i===idx?' active':'');
+        d.onclick=()=>{ idx=i; update(); restart(); };
+        dotsWrap.appendChild(d);
+      }
+    }
+    function update(){
+      slides.style.transform = `translateX(-${idx*100}%)`;
+      Array.from(dotsWrap.children).forEach((el,i)=> el.classList.toggle('active', i===idx));
+    }
+    function next(){ idx = (idx+1)%total; update(); }
+    function restart(){ clearInterval(t); t=setInterval(next, 4500); }
+    renderDots(); update(); restart();
+  </script>
+</body>
+</html>
