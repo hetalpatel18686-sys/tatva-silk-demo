@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Tatva Silk • Shop (Mobile)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#8B5E3C" />
+  <meta name="description" content="Tatva Silk • Mobile Shop listing — Bilimora, Navsari" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --brand:#8B5E3C;
+      --brand-2:#CFAF80;
+      --ink:#0f172a;
+      --muted:#64748b;
+      --bg:#faf7f2;
+      --card:#ffffff;
+      --line:#e5e7eb;
+      --accent:#2563eb;
+      --danger:#ef4444;
+    }
+    *{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+    html,body{margin:0; padding:0; background:var(--bg); color:var(--ink); font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+    a{text-decoration:none; color:inherit}
+
+    /* App bar */
+    .appbar{
+      position:sticky; top:0; z-index:50; background:#fff; border-bottom:1px solid var(--line);
+      padding:8px 12px; display:flex; align-items:center; gap:10px;
+    }
+    .logo{display:flex; align-items:center; gap:8px}
+    .logo .mark{
+      width:28px; height:28px; border-radius:6px;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#fff;
+      display:grid; place-items:center; font-weight:700; font-family:"Playfair Display",serif;
+    }
+    .logo .name{font-weight:700}
+    .search{
+      flex:1; display:flex; align-items:center; gap:8px; background:#f8fafc; border:1px solid var(--line);
+      padding:8px 10px; border-radius:999px;
+    }
+    .search input{border:none; outline:0; background:transparent; width:100%; font-size:14px}
+    .iconbtn{border:1px solid var(--line); background:#fff; padding:6px 8px; border-radius:8px}
+    .cart-badge{position:relative}
+    .cart-badge .count{position:absolute; top:-6px; right:-6px; background:var(--danger); color:#fff; font-size:11px; border-radius:999px; padding:1px 5px}
+
+    /* Page */
+    .page{padding:10px 12px 78px}
+
+    /* Filter bar */
+    .toolbar{display:flex; align-items:center; gap:10px; margin-bottom:10px}
+    .chipbar{display:flex; gap:8px; overflow:auto; padding-bottom:4px}
+    .chip{
+      border:1px solid var(--line); background:#fff; padding:6px 10px; border-radius:999px; font-size:12px; white-space:nowrap;
+      cursor:pointer;
+    }
+    .chip.active{background:var(--brand); color:#fff; border-color:var(--brand)}
+    .sort{margin-left:auto; display:flex; align-items:center; gap:6px}
+    .sort select{border:1px solid var(--line); background:#fff; border-radius:8px; padding:6px 8px; font-size:13px}
+
+    /* Grid */
+    .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:10px}
+    .card{
+      background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; display:flex; flex-direction:column
+    }
+    .thumb{height:160px; background:#eee center/cover no-repeat}
+    .body{padding:10px}
+    .title{font-size:13px; min-height:36px}
+    .price{font-weight:700; margin-top:6px}
+    .meta{font-size:12px; color:var(--muted); margin-top:2px}
+    .btnrow{display:flex; gap:8px; margin-top:10px}
+    .btn{flex:1; display:inline-flex; align-items:center; justify-content:center; gap:6px; padding:8px 10px; border-radius:10px; border:1px solid var(--line); background:#fff; font-size:13px}
+    .btn.primary{background:var(--brand); color:#fff; border-color:var(--brand)}
+
+    /* Empty / results */
+    .bar{display:flex; align-items:center; justify-content:space-between; font-size:12px; color:var(--muted); margin:6px 0 10px}
+    .muted{color:var(--muted)}
+
+    /* Bottom tabs */
+    .tabs{
+      position:fixed; left:0; right:0; bottom:0; z-index:40; background:#fff; border-top:1px solid var(--line);
+      display:grid; grid-template-columns:repeat(4,1fr); height:56px;
+    }
+    .tab{display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; font-size:11px; color:#475569}
+    .tab.active{color:var(--brand)}
+
+    /* iOS safe areas */
+    @supports (padding: max(0px)) {
+      .tabs{ padding-bottom: max(env(safe-area-inset-bottom), 0px); }
+      .appbar{ padding-top: max(env(safe-area-inset-top), 8px); }
+    }
+  </style>
+</head>
+<body>
+  <!-- App bar -->
+  <header class="appbar">
+    <a href="/mobile" class="logo" aria-label="Tatva Silk Home">
+      <div class="mark">TS</div>
+      <div class="name">Tatva Silk</div>
+    </a>
+    <form class="search" onsubmit="event.preventDefault();">
+      <span>🔎</span>
+      <input id="q" placeholder="Search sarees, collections…" />
+    </form>
+    <button class="iconbtn cart-badge" title="Cart">
+      🛒 <span class="count" id="cartCount">0</span>
+    </button>
+  </header>
+
+  <main class="page">
+    <!-- Filters -->
+    <div class="toolbar">
+      <div class="chipbar" id="chipbar" role="tablist" aria-label="Categories">
+        <button class="chip active" data-cat="all" role="tab">All</button>
+        <button class="chip" data-cat="banarasi" role="tab">Banarasi</button>
+        <button class="chip" data-cat="kanjivaram" role="tab">Kanjivaram</button>
+        <button class="chip" data-cat="patola" role="tab">Patola</button>
+        <button class="chip" data-cat="soft-silk" role="tab">Soft Silk</button>
+      </div>
+      <div class="sort">
+        <label for="sort" class="muted">Sort</label>
+        <select id="sort">
+          <option value="popular">Popular</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="newest">Newest</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="bar">
+      <div id="resultCount">Showing 0 items</div>
+      <div id="activeHint" class="muted"></div>
+    </div>
+
+    <!-- Grid -->
+    <section id="grid" class="grid" aria-live="polite"></section>
+  </main>
+
+  <!-- Bottom Tabs -->
+  <nav class="tabs" role="navigation" aria-label="bottom navigation">
+    <a class="tab" href="/mobile">
+      <div>🏠</div><div>Home</div>
+    </a>
+    <a class="tab active" href="/mobile/shop">
+      <div>🛍️</div><div>Shop</div>
+    </a>
+    <a class="tab" href="#">
+      <div>🛒</div><div>Cart</div>
+    </a>
+    <a class="tab" href="#">
+      <div>👤</div><div>Account</div>
+    </a>
+  </nav>
+
+  <script>
+    // --- Demo data (can be replaced with Supabase later) ---
+    const PRODUCTS = [
+      {
+        id: 'banarasi-ruby', name: 'Banarasi Silk Saree – Ruby Red',
+        price: 9999, category: 'banarasi', rating: 4.7, createdAt: '2026-02-05',
+        img: 'https://images.unsplash.com/photo-1542060748-10c28b62716b?q=80&w=800&auto=format&fit=crop'
+      },
+      {
+        id: 'kanjivaram-gold', name: 'Kanjivaram Handloom – Gold Border',
+        price: 12499, category: 'kanjivaram', rating: 4.8, createdAt: '2026-02-11',
+        img: 'https://images.unsplash.com/photo-1520974735194-6e0b29f44a40?q=80&w=800&auto=format&fit=crop'
+      },
+      {
+        id: 'patola-emerald', name: 'Patola Gujarat Weave – Emerald',
+        price: 8999, category: 'patola', rating: 4.6, createdAt: '2026-01-30',
+        img: 'https://images.unsplash.com/photo-1542089363-5dc0d2ade1ad?q=80&w=800&auto=format&fit=crop'
+      },
+      {
+        id: 'soft-peacock', name: 'Soft Silk – Peacock Blue',
+        price: 5999, category: 'soft-silk', rating: 4.4, createdAt: '2026-02-14',
+        img: 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?q=80&w=800&auto=format&fit=crop'
+      },
+      {
+        id: 'dupatta-rose', name: 'Zari Dupatta – Rose Gold',
+        price: 1899, category: 'soft-silk', rating: 4.2, createdAt: '2026-02-01',
+        img: 'https://images.unsplash.com/photo-1561212044-bac5ef688a49?q=80&w=800&auto=format&fit=crop'
+      },
+      {
+        id: 'banarasi-emerald', name: 'Banarasi Brocade – Emerald Glow',
+        price: 10999, category: 'banarasi', rating: 4.5, createdAt: '2026-02-10',
+        img: 'https://images.unsplash.com/photo-1520975739166-7f4f90f7b4bd?q=80&w=800&auto=format&fit=crop'
+      },
+      {
+        id: 'kanjivaram-rose', name: 'Kanjivaram Silk – Rose Tint',
+        price: 13499, category: 'kanjivaram', rating: 4.9, createdAt: '2026-02-12',
+        img: 'https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=800&auto=format&fit=crop'
+      },
+      {
+        id: 'patola-sapphire', name: 'Patola Weave – Sapphire',
+        price: 9499, category: 'patola', rating: 4.3, createdAt: '2026-02-02',
+        img: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=800&auto=format&fit=crop'
+      }
+    ];
+
+    // --- Cart count persisted across pages ---
+    const CART_KEY = 'tatva_cart_count';
+    function getCartCount(){ return Number(localStorage.getItem(CART_KEY) || '0'); }
+    function setCartCount(v){ localStorage.setItem(CART_KEY, String(v)); document.getElementById('cartCount').textContent = v; }
+    setCartCount(getCartCount());
+
+    // --- Render helpers ---
+    const grid = document.getElementById('grid');
+    const resultCount = document.getElementById('resultCount');
+    const activeHint = document.getElementById('activeHint');
+    const chips = Array.from(document.querySelectorAll('.chipbar .chip'));
+    const sortSel = document.getElementById('sort');
+    const q = document.getElementById('q');
+
+    let state = {
+      q: '', cat: 'all', sort: 'popular'
+    };
+
+    function applyFilters(){
+      let list = PRODUCTS.slice();
+
+      // search
+      if (state.q.trim()){
+        const t = state.q.toLowerCase();
+        list = list.filter(p => p.name.toLowerCase().includes(t));
+      }
+
+      // category
+      if (state.cat !== 'all'){
+        list = list.filter(p => p.category === state.cat);
+      }
+
+      // sort
+      switch (state.sort){
+        case 'price-asc':  list.sort((a,b)=>a.price-b.price); break;
+        case 'price-desc': list.sort((a,b)=>b.price-a.price); break;
+        case 'newest':     list.sort((a,b)=> new Date(b.createdAt)-new Date(a.createdAt)); break;
+        default:           list.sort((a,b)=> b.rating - a.rating); // popular ~ rating
+      }
+
+      render(list);
+    }
+
+    function render(items){
+      resultCount.textContent = `Showing ${items.length} item${items.length===1?'':'s'}`;
+      activeHint.textContent = (state.cat==='all'?'All collections':state.cat.replace('-',' ')) +
+        (state.q ? ` • “${state.q}”` : '');
+
+      grid.innerHTML = items.map(p => `
+        <article class="card">
+          <div class="thumb" style="background-image:url('${p.img}')"></div>
+          <div class="body">
+            <div class="title">${p.name}</div>
+            <div class="price">₹ ${p.price.toLocaleString('en-IN')}</div>
+            <div class="meta">★ ${p.rating.toFixed(1)} • ${p.category.replace('-',' ')}</div>
+            <div class="btnrow">
+              <button class="btn" onclick="viewProduct('${p.id}')">View</button>
+              <button class="btn primary" onclick="addToCart()">Add</button>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function addToCart(){
+      setCartCount(getCartCount()+1);
+    }
+    function viewProduct(id){
+      alert('Product page "'+id+`" coming soon.\n(Next: /mobile/product/${id})`);
+    }
+
+    // Wire up chips
+    chips.forEach(ch => {
+      ch.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        ch.classList.add('active');
+        state.cat = ch.dataset.cat || 'all';
+        applyFilters();
+      });
+    });
+
+    // Sort
+    sortSel.addEventListener('change', () => {
+      state.sort = sortSel.value;
+      applyFilters();
+    });
+
+    // Search (debounced)
+    let t;
+    q.addEventListener('input', () => {
+      clearTimeout(t);
+      t = setTimeout(() => { state.q = q.value || ''; applyFilters(); }, 200);
+    });
+
+    // Initial render
+    applyFilters();
+  </script>
+</body>
+</html>
